@@ -1,0 +1,49 @@
+che# --- secrets and local configuration: never commit ---
+.env
+.env.*
+!.env.example
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+secrets/
+
+# --- private or machine-specific ---
+_local/
+data/*.db
+data/*.db-*
+data/*.log
+*.log
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- environments, caches, build output ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+build/
+node_modules/
+
+# --- large or third-party data and model weights (see NOTICE.md and docs/data-setup.md) ---
+data/raw/
+data/processed/
+ml/models/
+*.pt
+*.pth
+*.onnx
+*.h5
+*.keras
+*.joblib
+*.zip
+*.tar.gz
+
+# report build scratch
+report/out/

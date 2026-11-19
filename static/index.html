@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#173f35" />
+    <meta name="description" content="Dhartisense — a free field-aware agricultural advisory tool for farmers." />
+    <title>Dhartisense | Field advisory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="signed-out">
+    <div class="auth-screen" id="authScreen">
+      <div class="auth-card">
+        <div class="brand-lockup"><div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div><div><p class="brand-name">Dhartisense</p><p class="brand-subtitle">Field intelligence</p></div></div>
+        <div id="verifyPanel" hidden>
+          <h1>Check your email</h1>
+          <p class="auth-lead" id="verifyLead">We sent a confirmation link. Open it to start using Dhartisense.</p>
+          <p class="form-feedback" id="verifyMessage" role="status"></p>
+          <button class="button primary full-width" type="button" id="verifyResend">Send the email again</button>
+          <button class="button secondary full-width" type="button" id="verifyDone" style="margin-top:10px">I have confirmed it</button>
+          <button class="text-button" type="button" id="verifyOut" style="margin-top:12px">Use a different account</button>
+        </div>
+        <div id="authMain">
+        <h1 id="authTitle">Welcome back</h1>
+        <p class="auth-lead" id="authLead">Sign in to see your fields and plans.</p>
+        <div class="auth-tabs" role="tablist"><button type="button" class="auth-tab active" data-auth-mode="login" role="tab">Sign in</button><button type="button" class="auth-tab" data-auth-mode="register" role="tab">Create account</button></div>
+        <form id="authForm" class="stack-form" novalidate>
+          <label id="authNameRow" hidden>Your name<input id="authName" autocomplete="name" maxlength="80" /></label>
+          <label>Email<input id="authEmail" type="email" autocomplete="email" inputmode="email" required /></label>
+          <label>Password<span class="pw-wrap"><input id="authPassword" type="password" autocomplete="current-password" minlength="8" required /><button type="button" id="pwToggle" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="eye-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.9 17.9A10.9 10.9 0 0 1 12 19C5.5 19 2 12 2 12a18.5 18.5 0 0 1 5.1-5.9M9.9 5.2A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a18.6 18.6 0 0 1-2.2 3.2M1 1l22 22"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+          <p class="form-feedback error" id="authError" role="alert"></p>
+          <button class="button primary full-width" type="submit" id="authSubmit">Sign in</button>
+          <button class="text-button" type="button" id="authForgot">Forgot password?</button>
+        </form>
+        <p class="muted-text auth-foot">Your fields and plans are saved to your account, so you can use them from any device.</p>
+        </div>
+      </div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <p class="brand-name">Dhartisense</p>
+            <p class="brand-subtitle">Field intelligence</p>
+          </div>
+        </div>
+
+        <div class="side-section-label">Workspace</div>
+        <nav class="main-nav">
+          <button class="nav-item active" data-view="overview"><i data-lucide="layout-dashboard"></i><span data-i18n="Overview">Overview</span></button>
+          <button class="nav-item" data-view="fields"><i data-lucide="map"></i><span data-i18n="My fields">My fields</span></button>
+          <button class="nav-item" data-view="crop-plan"><i data-lucide="sprout"></i><span data-i18n="Crop plan">Crop plan</span></button>
+          <button class="nav-item" data-view="plant-health"><i data-lucide="scan-line"></i><span data-i18n="Plant health">Plant health</span></button>
+          <button class="nav-item" data-view="water"><i data-lucide="droplets"></i><span data-i18n="Water & nutrients">Water &amp; nutrients</span></button>
+          <button class="nav-item" data-view="ndvi"><i data-lucide="satellite"></i><span data-i18n="Crop health">Crop health</span></button>
+          <button class="nav-item" data-view="assistant"><i data-lucide="message-circle"></i><span data-i18n="Ask Dhartisense">Ask Dhartisense</span></button>
+          <button class="nav-item" data-view="reports"><i data-lucide="file-text"></i><span data-i18n="Reports">Reports</span></button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="free-note"><i data-lucide="badge-check"></i><div><strong>Free to use</strong><span>Built for farmers, with no paid plans.</span></div></div>
+          <button class="nav-item muted" data-view="settings"><i data-lucide="settings-2"></i><span data-i18n="Settings">Settings</span></button>
+        </div>
+      </aside>
+
+      <div class="mobile-nav-wrap">
+        <div class="brand-lockup compact">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="brand-name">Dhartisense</p>
+        </div>
+        <button class="icon-button" id="mobileMenuButton" aria-label="Open navigation"><i data-lucide="menu"></i></button>
+      </div>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="topbar-context"><span class="eyebrow">Your farm workspace</span><span class="topbar-location" id="topbarLocation"><i data-lucide="map-pin"></i><span>Location not set</span></span></div>
+          <div class="topbar-actions"><span class="save-state" id="saveState" aria-live="polite"></span><select class="field-switcher" id="fieldSwitcher" aria-label="Active field"></select><button class="icon-button" id="refreshWeather" aria-label="Refresh weather"><i data-lucide="refresh-cw"></i></button><button class="icon-button" id="signOutButton" aria-label="Sign out" title="Sign out"><i data-lucide="log-out"></i></button><button class="avatar-button" id="avatarButton" aria-label="Account" data-view-target="settings">F</button></div>
+        </header>
+
+        <section class="view active" data-view-panel="overview">
+          <div class="page-heading hero-heading">
+            <div><span class="eyebrow" id="todayLabel"></span><h1 data-i18n="Make today’s field decision with confidence.">Make today’s field decision with confidence.</h1><p>Dhartisense brings your field, weather and observations together so advice fits the land you actually work.</p></div>
+            <button class="button primary" id="setupFirstField"><i data-lucide="plus"></i> <span data-i18n="Add a field">Add a field</span></button>
+          </div>
+
+          <div class="notice-card setup-notice" id="setupNotice"><div class="notice-icon"><i data-lucide="map"></i></div><div><strong>Your first field is waiting</strong><p>Mark the boundary and add what you know about the soil. You can improve the profile over time.</p></div><button class="text-button" id="setupNoticeButton">Start setup <i data-lucide="arrow-up-right"></i></button></div>
+
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-label"><i data-lucide="cloud-sun"></i><span data-i18n="Weather">Weather</span></div><strong id="overviewTemperature">—</strong><span id="overviewWeatherLabel">Set a field location</span></article>
+            <article class="metric-card"><div class="metric-label"><i data-lucide="sprout"></i><span data-i18n="Crop plan">Crop plan</span></div><strong id="overviewCrop">Not set</strong><span id="overviewCropNote">Run Crop plan to get started</span></article>
+            <article class="metric-card"><div class="metric-label"><i data-lucide="ruler"></i><span data-i18n="Field area">Field area</span></div><strong id="overviewArea">—</strong><span id="overviewFieldName">No field mapped</span></article>
+            <article class="metric-card"><div class="metric-label"><i data-lucide="droplets"></i><span data-i18n="Next irrigation">Next irrigation</span></div><strong id="overviewWater">Not planned</strong><span id="overviewWaterNote">Make a schedule on the Water page</span></article>
+          </div>
+
+          <div class="section-heading"><div><span class="eyebrow" data-i18n="Your fields">Your fields</span><h2 id="fieldListTitle">Fields on your account</h2></div></div>
+          <div class="field-cards" id="fieldList"></div>
+
+          <div class="dashboard-grid">
+            <article class="panel field-summary-panel"><div class="panel-heading"><div><span class="eyebrow">Field context</span><h2 id="summaryFieldTitle">No field profile yet</h2></div><button class="icon-button" data-view-target="fields" aria-label="Open field map"><i data-lucide="arrow-up-right"></i></button></div><div class="summary-map" id="summaryMap" hidden></div><div class="mini-map-placeholder" id="summaryMapPlaceholder"><i data-lucide="map"></i><span>Map a field to see its context here.</span></div><div class="summary-list"><div><span>Soil profile</span><strong id="summarySoilStatus">Not entered</strong></div><div><span>Water source</span><strong id="summaryWaterStatus">Not entered</strong></div><div><span>Current crop</span><strong id="summaryCropStatus">Not entered</strong></div></div></article>
+            <article class="panel priority-panel"><div class="panel-heading"><div><span class="eyebrow">Next best action</span><h2 id="priorityTitle">Complete your field profile</h2></div><span class="status-pill neutral" id="priorityPill">Getting started</span></div><p id="priorityText">Your recommendations become more useful when Dhartisense knows where your field is and what you are growing.</p><button class="button secondary full-width" data-view-target="fields" id="priorityAction">Open field setup <i data-lucide="arrow-right"></i></button><a class="button secondary full-width" id="priorityCalendar" target="_blank" rel="noopener" hidden style="margin-top:10px"><i data-lucide="calendar-plus"></i> Add to Google Calendar</a><div class="source-note"><i data-lucide="info"></i><span>Advice is labelled as farmer-entered, public data or model estimate.</span></div></article>
+          </div>
+
+          <div class="section-heading"><div><span class="eyebrow">Your workflow</span><h2>From field map to field action</h2></div></div>
+          <div class="workflow-grid"><button class="workflow-card" data-view-target="fields"><span class="workflow-number">01</span><i data-lucide="map-pinned"></i><strong>Map your field</strong><span>Draw the boundary once and keep the area on record.</span><i class="workflow-arrow" data-lucide="arrow-up-right"></i></button><button class="workflow-card" data-view-target="crop-plan"><span class="workflow-number">02</span><i data-lucide="sprout"></i><strong>Plan the season</strong><span>Compare crop options against soil, weather and water.</span><i class="workflow-arrow" data-lucide="arrow-up-right"></i></button><button class="workflow-card" data-view-target="plant-health"><span class="workflow-number">03</span><i data-lucide="scan-line"></i><strong>Watch plant health</strong><span>Upload a clear image and keep observations with the field.</span><i class="workflow-arrow" data-lucide="arrow-up-right"></i></button><button class="workflow-card" data-view-target="assistant"><span class="workflow-number">04</span><i data-lucide="message-circle"></i><strong>Ask with context</strong><span>Get an answer that sees the field profile you built.</span><i class="workflow-arrow" data-lucide="arrow-up-right"></i></button></div>
+        </section>
+
+        <section class="view" data-view-panel="fields">
+          <div class="page-heading"><div><span class="eyebrow">Field mapping</span><h1 data-i18n="Build your field profile.">Build your field profile.</h1><p>Search for a nearby place or use your device location, then draw the boundary on the map.</p></div><div class="field-heading-actions"><button class="button secondary" id="locateMe"><i data-lucide="locate-fixed"></i> Use my location</button><button class="button secondary" id="openFieldLocationSearch"><i data-lucide="search"></i> Find nearby place</button></div></div>
+          <div class="field-location-search" id="fieldLocationSearch" hidden><div class="field-location-input"><i data-lucide="map-pin"></i><input id="fieldLocationQuery" placeholder="Search village, town or nearby landmark" autocomplete="off" /><button class="button primary" id="fieldLocationSearchButton" type="button">Search</button></div><div class="location-results" id="fieldLocationResults"></div></div>
+          <div class="field-layout"><article class="panel map-panel"><div class="panel-heading"><div><span class="eyebrow">Interactive map</span><h2 id="mapHeading">Mark your boundary</h2></div></div><div class="map-stats" id="mapStats"></div><div id="fieldMap" class="field-map" aria-label="Field boundary map"></div>
+          <div class="map-toolbar" id="mapToolbar"><div class="segmented" role="group" aria-label="Drawing style"><button type="button" id="modeTap" class="on">Tap corners</button><button type="button" id="modeFree">Draw freehand</button></div><div class="map-toolbar-actions"><button type="button" class="button primary small" id="finishPolygon" hidden>Close shape</button><button type="button" class="text-button" id="undoPoint" hidden>Undo</button><button type="button" class="text-button danger" id="clearPolygon" hidden>Clear</button></div></div><div class="map-instruction"><i data-lucide="mouse-pointer-2"></i><span id="mapHint">Tap corners around your field, then tap the first corner to close it. For curved edges, switch to Draw freehand and trace the boundary with your finger or mouse.</span></div></article><article class="panel form-panel"><div class="panel-heading"><div><span class="eyebrow">Field details</span><h2>What should we remember?</h2></div></div><form id="fieldForm" class="stack-form"><label>Farm name<input name="farmName" id="farmName" placeholder="e.g. Home farm" required /></label><label>Field name<input name="fieldName" id="fieldName" placeholder="e.g. North field" required /></label><div class="form-row"><label>Current crop<select name="crop" id="fieldCrop"><option value="">Not planted yet</option><option>Rice</option><option>Maize</option><option>Wheat</option><option>Pigeon pea</option><option>Groundnut</option><option>Cotton</option><option>Tomato</option></select></label><label>Growth stage<select name="stage" id="fieldStage"><option value="">Not known</option><option>Pre-sowing</option><option>Seedling</option><option>Vegetative</option><option>Flowering</option><option>Fruit or grain fill</option><option>Harvest</option></select></label></div><div class="form-section-title">Soil, as you know it</div><div class="form-row"><label>Soil texture<select name="texture" id="soilTexture"><option value="">Unknown</option><option>Sand</option><option>Loam</option><option>Clay loam</option><option>Clay</option><option>Silt loam</option></select></label><label>Soil pH<input name="ph" id="soilPh" inputmode="decimal" placeholder="Unknown" /></label></div><div class="form-row"><label>Water source<select name="waterSource" id="waterSource"><option value="">Unknown</option><option>Rainfed</option><option>Open well</option><option>Borewell</option><option>Canal</option><option>Stored water</option></select></label><label>Irrigation method<select name="irrigation" id="irrigationMethod"><option value="">Unknown</option><option>None / rainfed</option><option>Flood</option><option>Furrow</option><option>Sprinkler</option><option>Drip</option></select></label></div><label class="check-label"><input type="checkbox" id="soilTestKnown" /><span>I have a soil test and can add details later.</span></label><button class="button primary full-width" type="submit"><i data-lucide="save"></i> <span data-i18n="Save field profile">Save field profile</span></button><p class="form-feedback" id="fieldFeedback" role="status"></p></form></article></div>
+        </section>
+
+        <section class="view" data-view-panel="crop-plan">
+          <div class="page-heading"><div><span class="eyebrow">Season planning</span><h1 data-i18n="Choose with the field in mind.">Choose with the field in mind.</h1><p>Your field location, the weather history there, your soil details and the planting date are matched against what each crop needs. You get the five best fits.</p></div></div>
+          <div class="growing-bar" id="growingBar" hidden></div>
+          <div class="two-column"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">Recommendation inputs</span><h2>Tell us about this season</h2></div></div><form id="cropPlanForm" class="stack-form"><label>Field<select id="planField"><option>No field saved</option></select></label><p class="plan-soil" id="planSoil"></p><div class="form-row"><label>Planting date<input type="date" id="plantingDate" /></label><label>What matters most<select id="farmObjective"><option value="fit">Best overall fit</option><option value="risk">Lower risk (no weak spot)</option><option value="water">Lower water use</option></select></label></div><label>Crops you have in mind (optional)<div class="chip-grid crop-chips" id="cropChoices"><span class="muted-text">Loading crops…</span></div></label><button class="button primary full-width" type="submit"><i data-lucide="sparkles"></i> <span data-i18n="Find best crops">Find best crops</span></button></form></article><article class="panel result-panel" id="cropResult"><div class="empty-result"><div class="empty-icon"><i data-lucide="sprout"></i></div><span class="eyebrow">Crop suitability</span><h2>Ready when you are</h2><p>Save your field with its location, pick a planting date and press Find best crops. Soil pH, texture and irrigation make the result more accurate.</p><span class="status-pill neutral">Not run yet</span></div></article></div>
+        <article class="panel field-plan" id="fieldPlanPanel" hidden><div class="panel-heading"><div><span class="eyebrow">Field plan</span><h2 id="planTitle">Plan your field</h2></div><button class="button secondary" id="printPlan" type="button"><i data-lucide="printer"></i> Print plan</button></div><p class="form-feedback error" id="planFeedback" role="status"></p><div class="plan-controls"><label>Irrigation layout<select id="planIrrigation"><option value="sprinkler">Sprinkler</option><option value="drip">Drip</option><option value="flood">Flood / furrow</option></select></label><p class="muted-text" id="planIrrigationNote"></p><p class="muted-text">Drag the 💧 pin to your well, pump or canal outlet. The pipe layout follows it.</p></div><div class="plan-grid"><div id="planMap" class="field-map plan-map" aria-label="Field plan map"></div><div class="plan-summary" id="planSummary"></div></div><p class="source-note"><i data-lucide="info"></i><span>A starting layout from your field shape, typical spacings for the crop and standard sprinkler and drip dimensions. It does not know your slope, soil, trees, wells or buildings, so adjust it on the ground. Yellow line: your boundary. Dashed tan: headland for turning the tractor. Tan lanes: working paths. Green lines: crop rows. Blue: water lines.</span></p></article>
+        </section>
+
+        <section class="view" data-view-panel="plant-health">
+          <div class="page-heading"><div><span class="eyebrow" data-i18n="Plant health">Plant health</span><h1 data-i18n="Look closer, early.">Look closer, early.</h1><p>Take a clear photo in natural light. The image model will only make a likely classification, not a confirmed diagnosis.</p></div></div>
+          <div class="two-column"><article class="panel upload-panel"><div class="panel-heading"><div><span class="eyebrow">Image check</span><h2>Upload a plant image</h2></div><i class="panel-heading-icon" data-lucide="camera"></i></div><label class="field-label" for="plantCrop">Which crop is this?<select id="plantCrop"><option value="">Not sure (less reliable)</option></select></label><label class="upload-drop" for="plantImage"><input id="plantImage" type="file" accept="image/*" /><span class="upload-visual"><i data-lucide="image-plus"></i></span><strong>Choose a clear leaf or plant photo</strong><span>JPG or PNG · One to three images</span></label><div class="capture-tips"><div><i data-lucide="sun"></i><span>Use natural light</span></div><div><i data-lucide="focus"></i><span>Keep the symptom sharp</span></div><div><i data-lucide="leaf"></i><span>Include the whole plant if possible</span></div></div><p class="form-feedback" id="imageFeedback" role="status"></p></article><article class="panel result-panel"><div class="empty-result"><div class="empty-icon"><i data-lucide="scan-line"></i></div><span class="eyebrow">Model status</span><h2>Upload a photo to begin</h2><p>The model names the most likely disease, then Dhartisense suggests cure and prevention steps you can discuss further.</p><button class="button secondary" data-view-target="assistant"><i data-lucide="message-circle"></i> Ask about symptoms</button></div></article></div>
+        <article class="panel" id="plantHistoryPanel" hidden><div class="panel-heading"><div><span class="eyebrow">Recent checks</span><h2>Your plant checks</h2></div><button class="text-button danger" id="clearHistory" type="button">Clear all</button></div><div id="plantHistory"></div></article>
+        </section>
+
+        <section class="view" data-view-panel="water">
+          <div class="page-heading"><div><span class="eyebrow" data-i18n="Water & nutrients">Water &amp; nutrients</span><h1 data-i18n="Plan from what you can observe.">Plan from what you can observe.</h1><p>No sensors are connected. Your observations, crop stage and public weather remain clearly labelled in every suggestion.</p></div></div>
+          <div class="two-column"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">Irrigation schedule</span><h2>Which crops, and what do you see today?</h2></div></div><form id="waterForm" class="stack-form"><div class="field-label">Crops <span class="muted-text" id="waterCropHint"></span></div><div class="choice-chips" id="waterCrops"></div><div class="form-row"><button type="button" class="button secondary" id="waterAllCrops">Select all suggested</button><label>Add another crop<select id="waterOtherCrop"><option value="">Choose…</option></select></label></div><label>Planting date<input type="date" id="waterPlantingDate" /></label><label>Soil surface<select id="soilObservation"><option value="">Not observed</option><option>Dry and dusty</option><option>Dry below the surface</option><option>Moist</option><option>Wet</option><option>Standing water</option></select></label><div class="form-row"><label>Last irrigation date<input type="date" id="lastIrrigation" /></label><label>Recent rainfall<select id="recentRain"><option value="">Unknown</option><option>None</option><option>Light</option><option>Moderate</option><option>Heavy</option></select></label></div><label>Notes<textarea id="waterNotes" rows="4" placeholder="Add an observation you want to remember..."></textarea></label><button class="button primary full-width" type="submit"><i data-lucide="droplets"></i> <span data-i18n="Make irrigation schedule">Make irrigation schedule</span></button><p class="form-feedback" id="waterFeedback" role="status"></p></form></article><article class="panel action-panel" id="waterResult"><div class="empty-result"><div class="empty-icon"><i data-lucide="droplets"></i></div><span class="eyebrow">Irrigation schedule</span><h2>Pick your crops to see when to irrigate</h2><p>You get the next irrigation date and amount for each crop, from the crop's growth stage, recent and forecast weather, and what you see in the field.</p></div></article></div><div class="two-column nutrient-row"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">Nutrient profile</span><h2>Add a soil test when you have one</h2></div></div><div class="nutrient-inputs"><label>Nitrogen (kg/ha)<input placeholder="Unknown" inputmode="decimal" /></label><label>Phosphorus (kg/ha)<input placeholder="Unknown" inputmode="decimal" /></label><label>Potassium (kg/ha)<input placeholder="Unknown" inputmode="decimal" /></label></div><button class="button primary full-width" type="button" id="nutrientPlanBtn"><i data-lucide="sprout"></i> <span data-i18n="Make fertiliser plan">Make fertiliser plan</span></button><p class="source-note"><i data-lucide="info"></i><span>Enter available N, P (Olsen) and K from your soil test or Soil Health Card, in kg/ha. Leave a value blank if you don't have it and the general dose is used. Uses the crops and planting date chosen above.</span></p><div id="nutrientResult"></div></article><article class="panel"><div class="panel-heading"><div><span class="eyebrow">Weather connection</span><h2 id="waterWeatherTitle">Location not set</h2></div></div><div class="weather-strip" id="waterWeatherStrip"><span class="muted-text">Map a field to load public weather context.</span></div></article></div>
+        </section>
+
+        <section class="view" data-view-panel="ndvi">
+          <div class="page-heading"><div><span class="eyebrow">Satellite crop health</span><h1>See how your field is growing.</h1><p>Satellite pictures show how green each part of your field is. Red spots are weak, green spots are strong. A new picture arrives about every five days.</p></div><button class="button primary" id="ndviRefresh" type="button"><i data-lucide="satellite"></i> <span>Check crop health</span></button></div>
+          <div class="notice-card" id="ndviMessage"><div class="notice-icon"><i data-lucide="satellite"></i></div><div><strong>Open this page to read your field</strong><p>We look at the last five months of Sentinel-2 pictures of the selected field.</p></div><button class="text-button" id="ndviGoFields" type="button" hidden>Open My fields <i data-lucide="arrow-up-right"></i></button></div>
+          <div class="ndvi-layout" id="ndviLayout" hidden>
+            <article class="panel ndvi-map-panel"><div class="panel-heading"><div><span class="eyebrow" id="ndviMapDate">Latest clear image</span><h2>Field health map</h2></div><div class="segmented" role="group" aria-label="Map style"><button type="button" id="ndviShowColours" class="on">Health colours</button><button type="button" id="ndviShowPlain">Satellite</button></div></div>
+              <div id="ndviMap" class="ndvi-map" aria-label="Crop health map"></div>
+              <div class="ndvi-legend"><span>Weak</span><div class="ndvi-bar"></div><span>Strong</span></div>
+              <div class="ndvi-dates" id="ndviDates"></div></article>
+            <article class="panel ndvi-side" id="ndviSummary"></article>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="assistant">
+          <div class="page-heading"><div><span class="eyebrow">Agricultural assistant</span><h1>Ask with your field beside you.</h1><p>Questions are sent through the server to Groq only when you configure your key. The assistant uses your saved field context.</p></div><span class="status-pill neutral" id="assistantStatus">Checking connection</span></div>
+          <div class="assistant-layout"><article class="panel chat-panel"><div class="chat-header"><div class="assistant-avatar"><i data-lucide="sprout"></i></div><div><strong>Dhartisense assistant</strong><span>Plain-language field guidance</span></div><span class="online-dot" id="assistantDot"></span></div><div class="chat-messages" id="chatMessages"><div class="chat-message assistant"><p>Tell me what you are observing in the field, or ask about crop planning, weather, irrigation or nutrients.</p><span class="message-meta">Context-aware guidance · verify important decisions locally</span></div></div><form class="chat-composer" id="assistantForm"><textarea id="assistantMessage" rows="2" placeholder="Ask about your field..." required></textarea><button class="button primary" type="submit" aria-label="Send question"><i data-lucide="send"></i></button></form></article><aside class="panel context-panel"><div class="panel-heading"><div><span class="eyebrow">Context shared</span><h2 id="assistantContextTitle">No field selected</h2></div></div><div class="context-list"><div><i data-lucide="map-pin"></i><span>Location</span><strong id="assistantContextLocation">Unknown</strong></div><div><i data-lucide="sprout"></i><span>Crop</span><strong id="assistantContextCrop">Unknown</strong></div><div><i data-lucide="layers-3"></i><span>Soil</span><strong id="assistantContextSoil">Unknown</strong></div><div><i data-lucide="droplets"></i><span>Water</span><strong id="assistantContextWater">Unknown</strong></div></div><p class="source-note"><i data-lucide="lock-keyhole"></i><span>Your key stays on the server and is never sent to the browser.</span></p></aside></div>
+        </section>
+
+        <section class="view" data-view-panel="reports">
+          <div class="page-heading"><div><span class="eyebrow">Farm records</span><h1 data-i18n="Keep your field story together.">Keep your field story together.</h1><p>A one-page summary of this field: profile, boundary, crops, irrigation and fertiliser plans.</p></div><button class="button secondary" id="printReport"><i data-lucide="printer"></i> <span data-i18n="Print or save as PDF">Print or save as PDF</span></button></div>
+          <div class="report-preview panel"><div class="report-cover"><div class="report-brand"><div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div><strong>Dhartisense</strong></div><span class="eyebrow">Personal field report</span><h2 id="reportTitle">Your farm report will appear here</h2><p id="reportSubtitle">Map a field and save its profile to create a current field summary.</p><div class="report-meta"><span id="reportArea">Area —</span><span id="reportCrop">Crop —</span><span id="reportDate">Updated —</span></div></div><div id="reportBody" class="report-body"></div></div>
+        </section>
+
+        <section class="view" data-view-panel="settings">
+          <div class="page-heading"><div><span class="eyebrow">Your preferences</span><h1>Keep the tool comfortable to use.</h1><p>Language and units stay on this device. Fields and plans live in your account.</p></div></div>
+          <article class="panel settings-panel"><div class="setting-row"><div><strong data-i18n="Preferred language">Preferred language</strong><span>Choose the language used by the assistant and reports.</span></div><select id="languageSelect"><option>English</option><option>Hindi</option><option>Marathi</option><option>Bengali</option><option>Tamil</option></select></div><div class="setting-row"><div><strong data-i18n="Units">Units</strong><span>Area and weather display preferences.</span></div><select id="unitSelect"><option value="metric">Metric (hectare, Celsius)</option><option value="imperial">Imperial (acre, Fahrenheit)</option></select></div><div class="setting-row"><div><strong data-i18n="Account">Account</strong><span id="accountLine">Signed in</span></div><button class="button danger-outline" id="clearLocalData">Sign out</button></div></article>
+        </section>
+
+        <footer class="app-footer"><span>Dhartisense · Free farmer tool</span><span>Weather data by Open-Meteo.com (CC BY 4.0) · Imagery © Esri, Maxar, Earthstar Geographics · Contains modified Copernicus Sentinel data · Place search © OpenStreetMap contributors</span></footer>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="setupModal" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-heading"><div><span class="eyebrow">First field</span><h2 id="modalTitle">Start with what you know.</h2></div><button class="icon-button" id="closeModal" aria-label="Close setup"><i data-lucide="x"></i></button></div><p>We will save this profile only in your browser. You can add the boundary on the next step.</p><form id="quickSetupForm" class="stack-form"><label>Farm name<input id="quickFarmName" required placeholder="e.g. Home farm" /></label><label>Field name<input id="quickFieldName" required placeholder="e.g. North field" /></label><label>Nearest town or village<input id="quickLocation" required placeholder="Search for a place" /></label><div class="location-results" id="locationResults"></div><button class="button primary full-width" type="submit"><i data-lucide="arrow-right"></i> Continue to field map</button></form></div></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/lucide@1.73.0/dist/umd/lucide.min.js" integrity="sha384-DdDSdhkTpRzHOpRXj0iG8b2rBu5xPWN5SFqnCEZ0YKb/Yh1Ymmc9PVsYEZZOq40r" crossorigin="anonymous"></script>
+    <script src="/ui.js"></script>
+    <script src="/firebase-auth.js"></script>
+    <script src="/app.js"></script>
+    <script src="/fieldplan.js"></script>
+    <script src="/ndvi.js"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+# Dataset manifest for Dhartisense.
+# Only real downloaded sources are listed here. Raw files remain ignored by Git.
+datasets:
+  - name: Crop Recommendation Dataset (Hugging Face copy)
+    status: legacy, no longer used by the app (its baseline model was removed; the file stays local only)
+    task: crop suitability classification baseline
+    source_url: https://huggingface.co/datasets/Solshine/CollegeOfAgricultureAndForestry_Agricultural_Crop_Dataset/resolve/main/Crop_recommendation.csv
+    local_file: data/raw/crop_recommendation.csv
+    access_date: 2026-11-03
+    sha256: 6a5470b754ac0639c0343051b4c18b36d349fdafb775f84203e80501dc2ab015
+    observed_rows: 1697
+    observed_columns: [N, P, K, temperature, humidity, ph, rainfall, label]
+    observed_labels: 15
+    licence: Verify the exact source licence before redistribution; the source page reports Apache 2.0.
+    limitations: Augmented tabular baseline with limited provenance and no field-level labels; not a local yield guarantee.
+    citation: Crop Recommendation Dataset, Solshine/CollegeOfAgricultureAndForestry_Agricultural_Crop_Dataset.
+
+  - name: PlantVillage Dataset
+    task: plant disease image classification
+    source_url: https://huggingface.co/datasets/mohanty/PlantVillage/resolve/main/data.zip
+    local_file: data/raw/plantvillage_data.zip
+    access_date: 2026-11-04
+    sha256: fba30c6a7965e49be94b47a62f8aff6cfb1c35c27f475f22092b56db41745e84
+    split_files:
+      - local_file: data/raw/plantvillage_splits/color_train.txt
+        source_url: https://huggingface.co/datasets/mohanty/PlantVillage/resolve/main/splits/color_train.txt
+        sha256: c43e0205b321d1c929116f5df1842348ac1e5c4861306e081416785d3c439dbd
+      - local_file: data/raw/plantvillage_splits/color_test.txt
+        source_url: https://huggingface.co/datasets/mohanty/PlantVillage/resolve/main/splits/color_test.txt
+        sha256: 7a7257dcb5f9456feae6ae81248d29c28f45dc4cd41a00c13a5c5c198c5f2f8b
+    observed_rows: 162916 images in archive; 3800 train and 760 test images used for the first baseline
+    observed_columns: image, label, crop, disease, leaf_id
+    observed_labels: 38
+    licence: Declared CC BY-SA 3.0 on the current dataset card; verify source terms before redistribution.
+    limitations: Controlled-background images can overestimate field performance; the first baseline is a 1-epoch sample and requires field-style evaluation.
+    citation: Mohanty, Hughes and Salathé (2016), DOI 10.3389/fpls.2016.01419.
+    first_model: ml/models/plant_disease_mobilenet_v3.pth
+    first_model_metrics: ml/models/plant_disease_mobilenet_v3.metrics.json
+    first_model_train_images: 3800
+    first_model_test_images: 760
+    first_model_test_accuracy: 0.6881578947368421

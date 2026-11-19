@@ -1,0 +1,252 @@
+[
+ {
+  "level": 1,
+  "text": "ABSTRACT",
+  "bookmark": "_Toc900100"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 1: INTRODUCTION",
+  "bookmark": "_Toc900200"
+ },
+ {
+  "level": 2,
+  "text": "1.1 Background and motivation",
+  "bookmark": "_Toc900201"
+ },
+ {
+  "level": 2,
+  "text": "1.2 What Dhartisense does",
+  "bookmark": "_Toc900202"
+ },
+ {
+  "level": 2,
+  "text": "1.3 Objectives",
+  "bookmark": "_Toc900203"
+ },
+ {
+  "level": 2,
+  "text": "1.4 Scope and boundaries",
+  "bookmark": "_Toc900204"
+ },
+ {
+  "level": 2,
+  "text": "1.5 Contributions",
+  "bookmark": "_Toc900205"
+ },
+ {
+  "level": 2,
+  "text": "1.6 Organisation of the report",
+  "bookmark": "_Toc900206"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 2: LITERATURE SURVEY",
+  "bookmark": "_Toc900300"
+ },
+ {
+  "level": 2,
+  "text": "2.1 Machine learning and sensing in agriculture",
+  "bookmark": "_Toc900307"
+ },
+ {
+  "level": 2,
+  "text": "2.2 Crop suitability assessment",
+  "bookmark": "_Toc900308"
+ },
+ {
+  "level": 2,
+  "text": "2.3 Irrigation scheduling and nutrient management",
+  "bookmark": "_Toc900309"
+ },
+ {
+  "level": 2,
+  "text": "2.4 Image-based plant disease recognition",
+  "bookmark": "_Toc900310"
+ },
+ {
+  "level": 2,
+  "text": "2.5 Satellite vegetation monitoring",
+  "bookmark": "_Toc900311"
+ },
+ {
+  "level": 2,
+  "text": "2.6 Language models for agricultural advice",
+  "bookmark": "_Toc900312"
+ },
+ {
+  "level": 2,
+  "text": "2.7 Summary and research gap",
+  "bookmark": "_Toc900313"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 3: PROBLEM STATEMENT",
+  "bookmark": "_Toc900400"
+ },
+ {
+  "level": 2,
+  "text": "3.1 Problem definition",
+  "bookmark": "_Toc900414"
+ },
+ {
+  "level": 2,
+  "text": "3.2 Gaps in current practice",
+  "bookmark": "_Toc900415"
+ },
+ {
+  "level": 2,
+  "text": "3.3 Constraints",
+  "bookmark": "_Toc900416"
+ },
+ {
+  "level": 2,
+  "text": "3.4 Requirements",
+  "bookmark": "_Toc900417"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 4: PROPOSED SOLUTION",
+  "bookmark": "_Toc900500"
+ },
+ {
+  "level": 2,
+  "text": "4.1 System overview and architecture",
+  "bookmark": "_Toc900518"
+ },
+ {
+  "level": 2,
+  "text": "4.2 Accounts, sessions and data storage",
+  "bookmark": "_Toc900519"
+ },
+ {
+  "level": 2,
+  "text": "4.3 Field mapping and geometry",
+  "bookmark": "_Toc900520"
+ },
+ {
+  "level": 2,
+  "text": "4.4 Crop ranking engine",
+  "bookmark": "_Toc900521"
+ },
+ {
+  "level": 2,
+  "text": "4.5 Irrigation scheduling engine",
+  "bookmark": "_Toc900522"
+ },
+ {
+  "level": 2,
+  "text": "4.6 Fertiliser planning engine",
+  "bookmark": "_Toc900523"
+ },
+ {
+  "level": 2,
+  "text": "4.7 Satellite crop-health module",
+  "bookmark": "_Toc900524"
+ },
+ {
+  "level": 2,
+  "text": "4.8 Plant-health module",
+  "bookmark": "_Toc900525"
+ },
+ {
+  "level": 2,
+  "text": "4.9 Assistant, field plan, reports and accessibility",
+  "bookmark": "_Toc900526"
+ },
+ {
+  "level": 2,
+  "text": "4.10 Deployment",
+  "bookmark": "_Toc900527"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 5: EXPERIMENTAL SETUP AND RESULT ANALYSIS",
+  "bookmark": "_Toc900600"
+ },
+ {
+  "level": 2,
+  "text": "5.1 Experimental setup",
+  "bookmark": "_Toc900628"
+ },
+ {
+  "level": 2,
+  "text": "5.2 Plant-disease model results",
+  "bookmark": "_Toc900629"
+ },
+ {
+  "level": 2,
+  "text": "5.3 Crop-ranking benchmark",
+  "bookmark": "_Toc900630"
+ },
+ {
+  "level": 2,
+  "text": "5.4 Verification of the irrigation and fertiliser engines",
+  "bookmark": "_Toc900631"
+ },
+ {
+  "level": 2,
+  "text": "5.5 The working application",
+  "bookmark": "_Toc900632"
+ },
+ {
+  "level": 2,
+  "text": "5.6 Discussion and limitations",
+  "bookmark": "_Toc900633"
+ },
+ {
+  "level": 1,
+  "text": "CHAPTER \u2013 6: CONCLUSION & FUTURE SCOPE",
+  "bookmark": "_Toc900700"
+ },
+ {
+  "level": 2,
+  "text": "6.1 Conclusion",
+  "bookmark": "_Toc900734"
+ },
+ {
+  "level": 2,
+  "text": "6.2 Limitations carried forward",
+  "bookmark": "_Toc900735"
+ },
+ {
+  "level": 2,
+  "text": "6.3 Future scope",
+  "bookmark": "_Toc900736"
+ },
+ {
+  "level": 1,
+  "text": "APPENDIX",
+  "bookmark": "_Toc900800"
+ },
+ {
+  "level": 2,
+  "text": "A. Interface routes",
+  "bookmark": "_Toc900837"
+ },
+ {
+  "level": 2,
+  "text": "B. Configuration",
+  "bookmark": "_Toc900838"
+ },
+ {
+  "level": 2,
+  "text": "C. Crops covered",
+  "bookmark": "_Toc900839"
+ },
+ {
+  "level": 2,
+  "text": "D. Producing the machine-learning figures",
+  "bookmark": "_Toc900840"
+ },
+ {
+  "level": 2,
+  "text": "E. Self-checks",
+  "bookmark": "_Toc900841"
+ },
+ {
+  "level": 1,
+  "text": "REFERENCE",
+  "bookmark": "_Toc900900"
+ }
+]

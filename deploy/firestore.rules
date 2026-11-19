@@ -1,0 +1,10 @@
+rules_version = '2';
+// Paste this into Firebase console > Firestore Database > Rules, then Publish.
+// Only the Dhartisense server (using the Admin SDK, which bypasses rules) may read or write data. Browsers get no direct access.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Needed to run the local plant-photo model and to train it (the app works without it and falls back to the Groq vision check).
+# On a server without a GPU install the CPU build: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch>=2.5
+torchvision>=0.20
+pillow>=10
